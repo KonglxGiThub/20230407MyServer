@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 /******************************
  * 用途说明:
- * 作者姓名: Administrator
+ * 作者姓名: 公众号:程序员小明1024
  * 创建时间: 2023-02-09 22:02
  ******************************/
 @Configuration
@@ -22,7 +22,7 @@ public class MybatisPlusConfig {
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.H2));
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
     }
 }
