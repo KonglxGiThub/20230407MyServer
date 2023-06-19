@@ -34,6 +34,7 @@ public class UserController {
         List<User> list = userService.list();
         return list;
     }
+
     /******************************
      * 用途说明: 
      * 作者姓名: 程序员小明1024
