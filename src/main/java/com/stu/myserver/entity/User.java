@@ -1,66 +1,55 @@
 package com.stu.myserver.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableId;
-
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-
+import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
- *
+ * 用户表
  * </p>
  *
- * @author 公众号:程序员小明1024
- * @since 2023-06-14
+ * @author 程序员小明1024
+ * @since 2023-06-23
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "User对象", description = "")
+@Getter
+@Setter
+@TableName("acl_user")
+@ApiModel(value = "User对象", description = "用户表")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "id")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Integer id;
+    @ApiModelProperty("会员id")
+      private String id;
 
-    @ApiModelProperty(value = "用户名")
-    private String userName;
+    @ApiModelProperty("微信openid")
+    private String username;
 
-    @ApiModelProperty(value = "密码")
+    @ApiModelProperty("密码")
     private String password;
 
-    @ApiModelProperty(value = "昵称")
+    @ApiModelProperty("昵称")
     private String nickName;
 
-    @ApiModelProperty(value = "邮箱")
-    private String email;
+    @ApiModelProperty("用户头像")
+    private String salt;
 
-    @ApiModelProperty(value = "电话")
-    private String phone;
+    @ApiModelProperty("用户签名")
+    private String token;
 
-    @ApiModelProperty(value = "地址")
-    private String address;
+    @ApiModelProperty("逻辑删除 1（true）已删除， 0（false）未删除")
+    private Integer isDeleted;
 
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    @ApiModelProperty("创建时间")
+    private LocalDateTime gmtCreate;
 
-    @ApiModelProperty(value = "头像")
-    private String avatarUrl;
-
-    @ApiModelProperty(value = "角色")
-    private String role;
-
-    @ApiModelProperty(value = "性别")
-    private String sex;
+    @ApiModelProperty("更新时间")
+    private LocalDateTime gmtModified;
 
 
 }
