@@ -9,7 +9,7 @@ import org.springframework.web.filter.CorsFilter;
 
 /******************************
  * 用途说明:
- * 作者姓名: Administrator
+ * 作者姓名: 公众号:程序员小明1024
  * 创建时间: 2022-07-27 23:16
  ******************************/
 @Configuration
