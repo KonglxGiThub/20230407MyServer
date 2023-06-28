@@ -1,4 +1,4 @@
-package ${package.Controller};
+package com.stu.myserver.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.*;
@@ -6,55 +6,36 @@ import javax.annotation.Resource;
 import java.util.List;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.web.bind.annotation.PathVariable;
-import ${package.Service}.${table.serviceName};
-import ${package.Entity}.${entity};
+import com.stu.myserver.service.IRoleService;
+import com.stu.myserver.entity.Role;
 import com.stu.myserver.utils.*;
-#if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
-#else
-import org.springframework.stereotype.Controller;
-#end
-#if(${superControllerClassPackage})
-import ${superControllerClassPackage};
-#end
 
 /**
  * <p>
- * $!{table.comment}
+ * 
  * </p>
  *
- * @author ${author}
- * @since ${date}
+ * @author 程序员小明1024
+ * @since 2023-06-28
  */
-#if(${restControllerStyle})
 @RestController
-#else
-@Controller
-#end
-@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
-#if(${kotlin})
-class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
-
-#else
-#if(${superControllerClass})
-public class ${table.controllerName} extends ${superControllerClass} {
-#else
-public class ${table.controllerName} {
-#end
+@RequestMapping("/role")
+public class RoleController {
 
     @Resource
-    private ${table.serviceName} ${table.entityPath}Service;
+    private IRoleService roleService;
 
     // 新增或者更新
     /***********************************
      * 用途说明:
-     * @param ${table.entityPath}
+     * @param role
      * 返回值说明:
      * @return R
      ***********************************/
     @PostMapping("add")
-    public R add(@RequestBody ${entity} ${table.entityPath}){
-        boolean result= ${table.entityPath}Service.save(${table.entityPath});
+    public R add(@RequestBody Role role){
+        boolean result= roleService.save(role);
         if(result){
             return R.ok().message(ResultCodeEnum.SUCCESS.getMessage());
         }else{
@@ -70,7 +51,7 @@ public class ${table.controllerName} {
      ***********************************/
     @DeleteMapping("/{id}")
     public R delete(@PathVariable Integer id){
-        boolean result= ${table.entityPath}Service.removeById(id);
+        boolean result= roleService.removeById(id);
         if(result){
             return R.ok().message(ResultCodeEnum.SUCCESS.getMessage());
         }else{
@@ -86,7 +67,7 @@ public class ${table.controllerName} {
      ***********************************/
     @PostMapping("/del/batch")
     public R deleteBatch(@RequestBody List<Integer> ids){
-        boolean result=  ${table.entityPath}Service.removeByIds(ids);
+        boolean result=  roleService.removeByIds(ids);
         if(result){
             return R.ok().message(ResultCodeEnum.SUCCESS.getMessage());
         }else{
@@ -102,7 +83,7 @@ public class ${table.controllerName} {
      ***********************************/
     @GetMapping
     public R findAll(){
-        return  R.ok().data("data", ${table.entityPath}Service.list());
+        return  R.ok().data("data", roleService.list());
     }
 
     /***********************************
@@ -113,23 +94,22 @@ public class ${table.controllerName} {
      ***********************************/
     @GetMapping("/{id}")
     public R findOne(@PathVariable Integer id){
-        return R.ok().data("data", ${table.entityPath}Service.getById(id));
+        return R.ok().data("data", roleService.getById(id));
     }
 
     /***********************************
      * 用途说明:
-     * @param pageNum pageSize ${table.entityPath}
+     * @param pageNum pageSize role
      * 返回值说明:
      * @return  R
      ***********************************/
     @PostMapping("/page")
     public R findPage(@RequestParam Integer pageNum,
                                     @RequestParam Integer pageSize,
-                                    @RequestBody ${entity} ${table.entityPath}){
-        QueryWrapper<${entity}> queryWrapper=new QueryWrapper<>();
+                                    @RequestBody Role role){
+        QueryWrapper<Role> queryWrapper=new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
-        return R.ok().data("data", ${table.entityPath}Service.page(new Page<>(pageNum,pageSize),queryWrapper));
+        return R.ok().data("data", roleService.page(new Page<>(pageNum,pageSize),queryWrapper));
     }
 }
 
-#end
